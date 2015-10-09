@@ -19,11 +19,18 @@ def get_decks():
     files.sort()
     items = []
     for file in files:
+        prefix = ''
+        prefix_color = 'red'
         name = file[:-4]
-        result = re.search("^\s*\d*\s*", name)
-        if result:
-            name = name[len(result.group(0)):]
-        items.append({'name' : name, 'url' : 'deck/' + file})
+        parts = name.split(":")
+        if len(parts) == 2:
+          prefix = parts[0] + ":"
+          name = parts[1]
+          if prefix == 'text:':  prefix_color = 'green'
+          if prefix == 'waste:': prefix_color = 'black'
+          if prefix == 'topic:': prefix_color = 'blue'
+        
+        items.append({'name' : name, 'url' : 'deck/' + file, 'prefix': prefix, 'prefix_color' : prefix_color})
     return items;
 
 def load_deck(deck_name):
