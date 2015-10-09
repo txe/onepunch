@@ -5,16 +5,12 @@
 
       <style>
         body {
-          background-color: #0b032d;
-          color: #ffb997;
           margin: 10px;
         }
         li {
           margin:5px;
         }
         a.label {
-          background-color: #ffb997;
-          color: #0b032d;
         }
 
       </style>
@@ -22,7 +18,7 @@
    <body>
      <ul>
        {% for item in items %}
-         <li><a class="label" href="{% raw item['url'] %}">{% raw item['name'] %}  >></a></li>
+         <li><a href="{% raw item['url'] %}">{% raw item['name'] %}</a></li>
        {% end %}
      </ul>
    </body>

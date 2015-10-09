@@ -33,19 +33,19 @@ def load_deck(deck_name):
 
     lines = list(filter(lambda x: len(x) > 0, map(lambda x: x.strip(), lines)))
     if len(lines) > 0 and lines[0] == "[associate]":
-        return load_deck_2(lines[1:])
+        return load_deck_type_2(lines[1:])
     else:
-        return load_deck_1(lines)
+        return load_deck_type_1(lines)
 
 # text with +
-def load_deck_1(lines):
+def load_deck_type_1(lines):
     content = []
     for line in lines:
         new_line = ""
         parts = line.split("+")
         for i in range(len(parts)):
             if i % 2 == 0:
-                new_line += "<span class='label'>" + parts[i] + "</span>"
+                new_line += parts[i]
             else:
                 huge = 1 if len(parts[i]) > 10 else 0
                 new_line += "<input class='card' type='text' rightVal='{0}' autocomplete='off' huge='{1}' />".format(tornado.escape.xhtml_escape(parts[i]), huge)
@@ -62,11 +62,11 @@ def random_answers(answers, others):
     return "".join(map(lambda x: "<span class='label label-danger'>" + x + "</span>", answers))
 
 # text with =
-def load_deck_2(lines):
+def load_deck_type_2(lines):
     word_value = {}
     for line  in lines:
         parts = line.split("=");
-        if (len(parts) != 2) : raise NameError('Back amount words')
+        if (len(parts) != 2) : raise NameError('Wrong amount words')
         word_value[parts[0].strip()] = parts[1].strip()
 
     content = []
