@@ -1,0 +1,130 @@
+<html>
+
+<head>
+  {% include "metadata.html" %}
+  <title>{{ title }}</title>
+
+  <style>
+
+    body {
+      background-color: #0b032d;
+      color: #ffb997;
+      margin: 10px;
+    }
+
+    span.label {
+      margin: 3px;
+      background-color: #ffb997;
+      color: #0b032d;
+    }
+    span.label-danger {
+      margin: 3px;
+      background-color: #843b62;
+    }
+
+    input.card {
+      width: 5em;
+      margin: 2px;
+      color: #ffb997;
+      background-color: #74546a;
+      border: none;
+    }
+    input.card[huge="1"] {
+      width: 12em
+    }
+    input.card:focus {
+      color: #ffb997;
+    }
+    input.card:focus[valid] {
+      color: #0b032d;
+    }
+    input.card[valid="0"] {
+      background-color: #ffb997;
+      color: #0b032d;
+    }
+    input.card[valid="1"] {
+      background-color: #843b62;
+    }
+    input.btn {
+      color: #0b032d;
+    }
+    button.btn {
+      color: #0b032d;
+    }
+
+  </style>
+
+  <script type="text/javascript">
+    function CheckResults() {
+      var wrongEl = null;
+      var items = document.getElementsByClassName("card");
+      Array.prototype.forEach.call(items, function(item) {
+        var rightVal = item.getAttribute("rightVal").toLowerCase();
+        var yourVal = item.value.toLowerCase();
+        if (yourVal == "")
+          item.removeAttribute("valid");
+        else if (rightVal == yourVal)
+          item.setAttribute("valid", "1");
+        else {
+          if (!wrongEl)
+            wrongEl = item;
+          item.setAttribute("valid", "0");
+        }
+      });
+      if (wrongEl) {
+        wrongEl.focus();
+        wrongEl.select();
+      }
+    }
+
+    function ShowValues()
+    {
+      if (document.body.getAttribute('showedTips') != "1")
+      {
+        document.body.setAttribute('showedTips', "1")
+        var items = document.getElementsByClassName("card");
+        Array.prototype.forEach.call(items, function(item) {
+            var span = document.createElement("SPAN");
+            span.className = span.className + "tips";
+            var text = document.createTextNode(' (' + item.getAttribute("rightVal") + ') ');
+            span.appendChild(text);
+            item.parentNode.insertBefore(span, item.nextSibling);
+        });
+      }
+      else {
+        document.body.setAttribute('showedTips', "0")
+        var items = document.getElementsByClassName("tips");
+        Array.prototype.forEach.call(items, function(item) {
+          item.remove();
+        });
+      }
+    }
+
+    function OnLoad() {
+      var items = document.getElementsByClassName("card");
+      items[0].focus();
+    }
+  </script>
+</head>
+
+<body onload="OnLoad">
+  <form action="http://127.0.0.1:8888">
+    <input type="submit" class="btn btn-sm btn-danger" value="<<" />
+    <button type="button" class="btn btn-sm btn-warning" onclick="CheckResults()">Check</button>
+    <button type="button" class="btn btn-sm btn-info" onclick="ShowValues()">Show</button>
+  </form>
+  <form role="form">
+    <ul>
+      {% for item in items %}
+      <li>{% raw item %} </li>
+      {% end %}
+    </ul>
+  </form>
+  <form action="http://127.0.0.1:8888">
+    <input type="submit" class="btn btn-sm btn-danger" value="<<" />
+    <button type="button" class="btn btn-sm btn-warning" onclick="CheckResults()">Check</button>
+    <button type="button" class="btn btn-sm btn-info" onclick="ShowValues()">Show</button>
+  </form>
+</body>
+
+</html>
