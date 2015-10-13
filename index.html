@@ -18,7 +18,7 @@
    <body>
      <ul>
        {% for item in items %}
-         <li><a href="{% raw item['url'] %}">{% raw item['name'] %}</a></li>
+         <li><a href="{% raw item['url'] %}"><span style="color:{% raw item['prefix_color'] %}">{% raw item['prefix'] %}</span>{% raw item['name'] %}</a></li>
        {% end %}
      </ul>
    </body>
