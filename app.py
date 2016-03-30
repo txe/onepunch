@@ -8,6 +8,7 @@ import re
 
 
 static_path = os.path.dirname(os.path.abspath(__file__))
+topics_path = join(static_path, "topics")
 
 def random_color():
     colors = ['lightgray', 'CCCCFF', '99CCCC', '66CC99'];
@@ -15,7 +16,7 @@ def random_color():
     return colors[0];
 
 def get_decks():
-    files = [f for f in listdir(static_path) if isfile(join(static_path, f)) and splitext(f)[1] == ".txt"]
+    files = [f for f in listdir(topics_path) if isfile(join(topics_path, f)) and splitext(f)[1] == ".txt"]
     files.sort()
     items = []
     for file in files:
@@ -34,7 +35,7 @@ def get_decks():
     return items;
 
 def load_deck(deck_name):
-    file_name = os.path.join(static_path, deck_name)
+    file_name = os.path.join(topics_path, deck_name)
     with open(file_name, encoding='utf8') as f:
         lines = f.readlines()
 
