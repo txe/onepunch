@@ -1,0 +1,14 @@
+взволнованный +excited+
+испуганный +scared+
+напряженный +stressed out+
+озабоченный +worried+
+озадаченный, сбитый с толку +confused+
+подавленный, угнетенный +depressed+
+раздраженный +annoyed+
+разочарованный +disappointed+
+рассроенный +upset+
+сильно испуганный +terrified+
+сильно растроенный (обозленный) +frustrated+
+скучающий +bored+
+смущенный, сконфуженный +embarrassed+
+удивленный +surprised+
